@@ -5,13 +5,13 @@ largura = 800
 altura = 300
 tamanho = (largura, altura)
 pygameDisplay = pygame.display
-pygameDisplay.set_caption("Star Wars")
+pygameDisplay.set_caption("go MARIO go!")
 gameDisplay = pygame.display.set_mode(tamanho)
-gameIcon = pygame.image.load("assets/TrupperIco.ico")
+gameIcon = pygame.image.load("assets/MarioIco.ico")
 pygameDisplay.set_icon(gameIcon)
 
 bg = pygame.image.load("assets/fundo.png")
-bg_destroy = pygame.image.load("assets/bg-destroy.jpeg")
+bg_destroy = pygame.image.load("assets/gameover.jpeg")
 # Aqui Começa o jogo
 
 explosaoSound = pygame.mixer.Sound("assets/explosao.wav")
