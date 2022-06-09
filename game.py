@@ -14,7 +14,7 @@ bg = pygame.image.load("assets/fundo.png")
 bg_destroy = pygame.image.load("assets/gameover.jpeg")
 # Aqui Começa o jogo
 
-explosaoSound = pygame.mixer.Sound("assets/explosao.wav")
+explosaoSound = pygame.mixer.Sound("assets/mortemario.mp3")
 explosaoSound.set_volume(0.5)
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -54,8 +54,8 @@ def jogo():
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(0.1)
 
-    missileSound = pygame.mixer.Sound("assets/missile.wav")
-    missileSound.set_volume(0.1)
+    missileSound = pygame.mixer.Sound("assets/sombowser1.wav")
+    missileSound.set_volume(0.06)
     pygame.mixer.Sound.play(missileSound)
 
     alturaNave = 150
