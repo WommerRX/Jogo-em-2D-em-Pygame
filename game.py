@@ -47,8 +47,8 @@ def jogo():
     movimentoXNave = 0
     movimentoYNave = 0
     pontos = 0
-    missile = pygame.image.load("assets/missile.png")
-    nave = pygame.image.load("assets/nave.png")
+    missile = pygame.image.load("assets/bowser.png")
+    nave = pygame.image.load("assets/mariovoaa.png")
     missile = pygame.transform.flip(missile, True, False)
     pygame.mixer.music.load("assets/trilha.mp3")
     pygame.mixer.music.play(-1)
