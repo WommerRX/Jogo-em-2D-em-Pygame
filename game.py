@@ -55,7 +55,7 @@ def jogo():
     pygame.mixer.music.set_volume(0.1)
 
     missileSound = pygame.mixer.Sound("assets/sombowser1.wav")
-    missileSound.set_volume(0.06)
+    missileSound.set_volume(0.03)
     pygame.mixer.Sound.play(missileSound)
 
     alturaNave = 150
