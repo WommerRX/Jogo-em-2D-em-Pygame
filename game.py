@@ -9,10 +9,11 @@ pygameDisplay.set_caption("go MARIO go!")
 gameDisplay = pygame.display.set_mode(tamanho)
 gameIcon = pygame.image.load("assets/MarioIco.ico")
 pygameDisplay.set_icon(gameIcon)
-
+nome = input("Qual o seu nome?")
+email = input("Qual seu email:")
 bg = pygame.image.load("assets/fundo.png")
 gameOvertela = pygame.image.load("assets/gameover.jpeg")
-# Aqui Começa o jogo
+
 
 morteMario = pygame.mixer.Sound("assets/mortemario.mp3")
 morteMario.set_volume(0.5)
