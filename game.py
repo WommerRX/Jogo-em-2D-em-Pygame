@@ -1,8 +1,8 @@
 import pygame
 import random
 pygame.init()
-largura = 800
-altura = 300
+largura = 1600  
+altura = 900
 tamanho = (largura, altura)
 pygameDisplay = pygame.display
 pygameDisplay.set_caption("go MARIO go!")
@@ -11,11 +11,11 @@ gameIcon = pygame.image.load("assets/MarioIco.ico")
 pygameDisplay.set_icon(gameIcon)
 
 bg = pygame.image.load("assets/fundo.png")
-bg_destroy = pygame.image.load("assets/gameover.jpeg")
+gameOvertela = pygame.image.load("assets/gameover.jpeg")
 # Aqui Começa o jogo
 
-explosaoSound = pygame.mixer.Sound("assets/mortemario.mp3")
-explosaoSound.set_volume(0.5)
+morteMario = pygame.mixer.Sound("assets/mortemario.mp3")
+morteMario.set_volume(0.5)
 black = (0, 0, 0)
 white = (255, 255, 255)
 clock = pygame.time.Clock()
@@ -23,17 +23,17 @@ gameEvents = pygame.event
 
 
 def dead(pontos):
-    gameDisplay.blit(bg_destroy, (0, 0))
+    gameDisplay.blit(gameOvertela, (0, 0))
     pygame.mixer.music.stop()
-    pygame.mixer.Sound.play(explosaoSound)
+    pygame.mixer.Sound.play(morteMario)
     fonte = pygame.font.Font("freesansbold.ttf", 50)
     fonteContinue = pygame.font.Font("freesansbold.ttf", 25)
     texto = fonte.render("Você Perdeu com "+str(pontos) +
                          " pontos!", True, black)
     textoContinue = fonteContinue.render(
         "Press enter to continue...", True, white)
-    gameDisplay.blit(textoContinue, (50, 200))
-    gameDisplay.blit(texto, (50, 100))
+    gameDisplay.blit(textoContinue, (100, 400))
+    gameDisplay.blit(texto, (400, 100))
     pygameDisplay.update()
 
 
@@ -41,27 +41,27 @@ def jogo():
     posicaoX = 0
     posicaoY = random.randrange(0, altura)
     direcao = True
-    velocidade = 1
-    posicaoXNave = 500
-    posicaoYNave = 100
-    movimentoXNave = 0
-    movimentoYNave = 0
+    velocidade = 5
+    posicaoXMario = 500
+    posicaoYMario = 100
+    movimentoXMario = 0
+    movimentoYMario = 0
     pontos = 0
-    missile = pygame.image.load("assets/bowser.png")
-    nave = pygame.image.load("assets/mariovoaa.png")
-    missile = pygame.transform.flip(missile, True, False)
+    bowser = pygame.image.load("assets/bowser.png")
+    mariovoador = pygame.image.load("assets/mariovoaa.png")
+    bowser = pygame.transform.flip(bowser, True, False)
     pygame.mixer.music.load("assets/trilha.mp3")
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(0.1)
 
-    missileSound = pygame.mixer.Sound("assets/sombowser1.wav")
-    missileSound.set_volume(0.03)
-    pygame.mixer.Sound.play(missileSound)
+    bowsersom = pygame.mixer.Sound("assets/sombowser1.wav")
+    bowsersom.set_volume(0.02)
+    pygame.mixer.Sound.play(bowsersom)
 
-    alturaNave = 150
-    larguraNave = 217
-    alturaMissel = 52
-    larguraMissel = 150
+    alturaMario = 180
+    larguraMario = 90
+    alturaBowser = 150
+    larguraBowser = 100
     dificuldade = 29
     jogando = True
     while True:
@@ -74,31 +74,31 @@ def jogo():
                 if event.key == pygame.K_RETURN:
                     jogo()
                 if event.key == pygame.K_LEFT:
-                    movimentoXNave = - 10
+                    movimentoXMario = - 10
                 elif event.key == pygame.K_RIGHT:
-                    movimentoXNave = 10
+                    movimentoXMario = 10
                 elif event.key == pygame.K_UP:
-                    movimentoYNave = -10
+                    movimentoYMario = -10
                 elif event.key == pygame.K_DOWN:
-                    movimentoYNave = 10
+                    movimentoYMario = 10
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    movimentoXNave = 0
-                    movimentoYNave = 0
+                    movimentoXMario = 0
+                    movimentoYMario = 0
 
         if jogando == True:
             # travando o movimento na tela
-            posicaoXNave = posicaoXNave + movimentoXNave
-            posicaoYNave = posicaoYNave + movimentoYNave
-            if posicaoXNave < 0:
-                posicaoXNave = 0
-            elif posicaoXNave >= largura - larguraNave:
-                posicaoXNave = largura - larguraNave
+            posicaoXMario = posicaoXMario + movimentoXMario
+            posicaoYMario = posicaoYMario + movimentoYMario
+            if posicaoXMario < 0:
+                posicaoXMario = 0
+            elif posicaoXMario >= largura - larguraMario:
+                posicaoXMario = largura - larguraMario
 
-            if posicaoYNave < 0:
-                posicaoYNave = 0
-            elif posicaoYNave >= altura - alturaNave:
-                posicaoYNave = altura - alturaNave
+            if posicaoYMario < 0:
+                posicaoYMario = 0
+            elif posicaoYMario >= altura - alturaMario:
+                posicaoYMario = altura - alturaMario
 
             # aqui termina a leitura de eventos
             # gameDisplay.fill(pink)
@@ -108,25 +108,25 @@ def jogo():
                 if posicaoX < largura-150:
                     posicaoX = posicaoX + velocidade
                 else:
-                    pygame.mixer.Sound.play(missileSound)
+                    pygame.mixer.Sound.play(bowsersom)
                     direcao = False
                     posicaoY = random.randrange(0, altura)
                     velocidade = velocidade + 1
-                    missile = pygame.transform.flip(missile, True, False)
+                    bowser = pygame.transform.flip(bowser, True, False)
                     pontos = pontos + 1
             else:
                 if posicaoX >= 0:
                     posicaoX = posicaoX - velocidade
                 else:
-                    pygame.mixer.Sound.play(missileSound)
+                    pygame.mixer.Sound.play(bowsersom)
                     direcao = True
                     posicaoY = random.randrange(0, altura)
                     velocidade = velocidade + 1
-                    missile = pygame.transform.flip(missile, True, False)
+                    bowser = pygame.transform.flip(bowser, True, False)
                     pontos = pontos + 1
 
-            gameDisplay.blit(missile, (posicaoX, posicaoY))
-            gameDisplay.blit(nave, (posicaoXNave, posicaoYNave))
+            gameDisplay.blit(bowser, (posicaoX, posicaoY))
+            gameDisplay.blit(mariovoador, (posicaoXMario, posicaoYMario))
             # pygame.draw.circle(
             #    gameDisplay, black, [posicaoX, posicaoY], 20, 0)
             fonte = pygame.font.Font("freesansbold.ttf", 20)
@@ -135,11 +135,11 @@ def jogo():
 
             # análise de colisão (modelo 1)
             '''
-            naveRect = nave.get_rect()
-            naveRect.x = posicaoXNave
-            naveRect.y = posicaoYNave
+            naveRect = mariovoador.get_rect()
+            naveRect.x = posicaoXMario
+            naveRect.y = posicaoYMario
 
-            missileRect = missile.get_rect()
+            missileRect = bowser.get_rect()
             missileRect.x = posicaoX
             missileRect.y = posicaoY
 
@@ -151,12 +151,12 @@ def jogo():
             # análise de colisão (modelo 2)
 
             pixelsYNave = list(
-                range(posicaoYNave, posicaoYNave + alturaNave+1))
+                range(posicaoYMario, posicaoYMario + alturaMario+1))
             pixelsXNave = list(
-                range(posicaoXNave, posicaoXNave + larguraNave+1))
+                range(posicaoXMario, posicaoXMario + larguraMario+1))
 
-            pixelsYMissel = list(range(posicaoY, posicaoY+alturaMissel+1))
-            pixelsXMissel = list(range(posicaoX, posicaoX+larguraMissel+1))
+            pixelsYMissel = list(range(posicaoY, posicaoY+alturaBowser+1))
+            pixelsXMissel = list(range(posicaoX, posicaoX+larguraBowser+1))
 
             # comparar e mostrar elementos iguais em duas listas
             # print(len(list(set(pixelsYMissel) & set(pixelsYNave))))
