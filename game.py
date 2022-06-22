@@ -1,5 +1,7 @@
 import pygame
 import random
+import os
+os.system("cls")
 pygame.init()
 largura = 1600  
 altura = 900
@@ -9,8 +11,14 @@ pygameDisplay.set_caption("go MARIO go!")
 gameDisplay = pygame.display.set_mode(tamanho)
 gameIcon = pygame.image.load("assets/MarioIco.ico")
 pygameDisplay.set_icon(gameIcon)
+os.system("cls")
 nome = input("Qual o seu nome?")
 email = input("Qual seu email:")
+arquivo = open("historico.txt","a")
+arquivo.write(f'Nome > {nome}\n')
+arquivo.write(f'Email > {email}\n')
+arquivo.write('\n')
+arquivo.close
 bg = pygame.image.load("assets/fundo.png")
 gameOvertela = pygame.image.load("assets/gameover.jpeg")
 
